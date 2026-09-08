@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: wedding-blog-mvp
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: NAVER_API_HUB_CLIENT_ID
+        sync: false
+      - key: NAVER_API_HUB_CLIENT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.7-flash
+      - key: GEMINI_FALLBACK_MODELS
+        value: gemini-3.6-flash,gemini-3.5-flash-lite
+      - key: OPENAI_MODEL
+        value: gpt-5.6-luna
+      - key: DAILY_NAVER_API_LIMIT
+        value: 50
+      - key: DAILY_GEMINI_API_LIMIT
+        value: 50
+      - key: DAILY_OPENAI_API_LIMIT
+        value: 50

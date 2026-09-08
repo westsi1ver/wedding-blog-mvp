@@ -1,0 +1,4 @@
+import { NextResponse } from "next/server";
+import { analyzeKeyword } from "@/lib/naver";
+export const runtime="nodejs"; export const maxDuration=60;
+export async function POST(req:Request){try{const {keyword,competitorUrls=[]}=await req.json();if(!keyword?.trim())return NextResponse.json({error:"키워드를 입력하세요."},{status:400});if(competitorUrls.length>7)return NextResponse.json({error:"경쟁글 URL은 최대 7개입니다."},{status:400});const analysis=await analyzeKeyword(keyword.trim(),competitorUrls);return NextResponse.json(analysis);}catch(e:any){const code=e?.message||"unknown";if(code==="DAILY_NAVER_API_LIMIT_REACHED")return NextResponse.json({error:"오늘 네이버 Search API 호출 한도에 도달했습니다."},{status:429});if(code==="DAILY_GEMINI_API_LIMIT_REACHED")return NextResponse.json({error:"오늘 Gemini API 호출 한도에 도달했습니다."},{status:429});return NextResponse.json({error:`분석 중 오류가 발생했습니다: ${code}`},{status:500});}}

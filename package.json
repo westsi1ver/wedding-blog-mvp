@@ -1,0 +1,27 @@
+{
+  "name": "wedding-blog-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "playwright:install": "playwright install chromium",
+    "test:naver": "node scripts/test-naver-playwright.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^1.20.0",
+    "cheerio": "^1.1.2",
+    "next": "^15.5.2",
+    "openai": "^5.19.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "playwright": "1.55.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "typescript": "^5.9.2"
+  }
+}
