@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { mergeDrafts, runGemini, runOpenAI } from "@/lib/ai";
+import { mergeDrafts, runGemini, runOpenAI } from "../../../lib/ai";
 import type { KeywordPlan } from "../../../lib/types";
 
 export const runtime = "nodejs";
