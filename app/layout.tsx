@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata = {
@@ -6,6 +7,6 @@ export const metadata = {
   icons: { icon: "/icon.svg" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return <html lang="ko"><body>{children}</body></html>;
 }

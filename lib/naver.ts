@@ -38,7 +38,8 @@ async function crawlUrl(link: string, keyword: string, rank: number): Promise<Co
     const bloggerName = clean($("meta[property='naverblog:nickname']").attr("content") || $(".nick").first().text() || "");
     $("script,style,noscript,svg,nav,header,footer").remove();
     const selectors=[".se-main-container",".se_component_wrap",".post_ct",".post-view","#postViewArea",".se_doc_viewer","article"];
-    let root=$("body"); for(const s of selectors){if($(s).length){root=$(s).first();break;}}
+    const matchedSelector = selectors.find((selector) => $(selector).length > 0);
+    const root = matchedSelector ? $(matchedSelector).first() : $("body").first();
     const text=clean(root.text()); if(text.length<120) return {...base,title,bloggerName,crawled:false,confidence:25};
     const paragraphs=root.find("p,.se-text-paragraph").filter((_,el)=>clean($(el).text()).length>10).length;
     const headings=root.find("h1,h2,h3,h4,.se-section-title,.se-title-text,.se-module-text h2,.se-module-text h3").length;
@@ -47,7 +48,7 @@ async function crawlUrl(link: string, keyword: string, rank: number): Promise<Co
     const normalizedKeyword=keyword.replace(/\s+/g,""); const normalizedText=text.replace(/\s+/g,"");
     const keywordCount=normalizedKeyword?normalizedText.split(normalizedKeyword).length-1:0;
     let confidence=55; if(text.length>800)confidence+=15; if(imageKeys.size>3)confidence+=10; if(paragraphs>3)confidence+=10; if(title)confidence+=5;
-    return {...base,title,bloggerName,charCount:text.length,paragraphCount:paragraphs,headingCount:headings,imageCount:imageKeys.size,keywordCount,rawText:text,imageUrls:[...imageKeys].slice(0,8),crawled:true,confidence:Math.min(95,confidence)};
+    return {...base,title,bloggerName,charCount:text.length,paragraphCount:paragraphs,headingCount:headings,imageCount:imageKeys.size,keywordCount,rawText:text,imageUrls:Array.from(imageKeys).slice(0,8),crawled:true,confidence:Math.min(95,confidence)};
   } catch(e){console.error("[NAVER MANUAL CRAWL FAIL]",link,e);return {...base,crawled:false,confidence:10};}
 }
 

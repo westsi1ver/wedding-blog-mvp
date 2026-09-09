@@ -97,7 +97,7 @@ export async function discoverActualNaverTopPosts(keyword: string, limit = 7): P
       }
     }
 
-    const items = [...found.values()].slice(0, limit).map((item, index) => ({
+    const items = Array.from(found.values()).slice(0, limit).map((item, index) => ({
       rank: index + 1,
       ...item,
     }));
