@@ -346,38 +346,17 @@ export default function Home() {
               : "실제 순위 자동수집 + 분석"}
           </button>
         </div>
-        <div style={{ marginBottom: 18 }}>
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-              alignItems: "center",
-            }}
-          >
-            <input
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              placeholder="예: 서울웨딩타워 본식스냅"
-            />
-
-            <button onClick={analyze} disabled={loading}>
-              {loading ? "실제 네이버 순위 확인 중..." : "분석 시작"}
-            </button>
-          </div>
-
-          <div
-            style={{
-              marginTop: 10,
-              fontSize: 13,
-              lineHeight: 1.6,
-              color: "#777",
-            }}
-          >
-            Playwright가 사람의 브라우저처럼 네이버 모바일 통합검색을 열고,
-            화면에 노출된 네이버 블로그 글을 위에서부터 최대 7개 찾아
-            분석합니다.
-          </div>
-        </div>
+        <p
+          className="helper"
+          style={{
+            marginTop: 12,
+            marginBottom: 0,
+            lineHeight: 1.6,
+          }}
+        >
+          Playwright가 사람의 브라우저처럼 네이버 모바일 통합검색을 열고, 화면에
+          노출된 네이버 블로그 글을 위에서부터 최대 7개 찾아 분석합니다.
+        </p>
         {(loading || analysisProgress > 0) && (
           <div
             style={{
