@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getApiUsage } from "@/lib/daily-limit";
+import { getApiUsage } from "../../../lib/daily-limit";
 
 export const runtime = "nodejs";
 
